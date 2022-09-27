@@ -1,0 +1,66 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  id              String      @id @default(uuid())
+  name            String
+  last_name       String
+  commercial_name String
+  email           String      @unique
+  password        String
+  Campaigns       Campaigns[]
+
+  @@map("users")
+}
+
+model Campaigns {
+  id         String    @id @default(uuid())
+  id_user    String
+  user       Users     @relation(fields: [id_user], references: [id])
+  name       String
+  proposal   String
+  is_active  Boolean   @default(true)
+  created_at DateTime  @default(now())
+  end_at     DateTime?
+  Links      Links[]
+
+  @@map("campaigns")
+}
+
+model Links {
+  id             String      @id @default(uuid())
+  id_campaign    String?
+  campaign       Campaigns?  @relation(fields: [id_campaign], references: [id])
+  phone_number   String
+  custom_message String
+  leads          Int
+  is_active      Boolean     @default(true)
+  has_preview    Boolean     @default(false)
+  created_at     DateTime    @default(now())
+  infoLeads      infoLeads[]
+
+  @@map("links")
+}
+
+model infoLeads {
+  id         String   @id @default(uuid())
+  id_link    String
+  links      Links    @relation(fields: [id_link], references: [id])
+  country    String
+  city       String
+  state      String
+  cep        String
+  ip         String
+  created_at DateTime @default(now())
+
+  @@map("info_leads")
+}
