@@ -8,3 +8,11 @@ export async function getUserById(id: string) {
     where: { id }
   });
 }
+
+export async function getUserByMail(email: string) {
+  return await prisma.users.findFirst({
+    where: {
+      email
+    }
+  });
+}
