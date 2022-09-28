@@ -25,3 +25,10 @@ export async function createCampaign(campaign: TCreateCampaign) {
     data: campaign
   });
 }
+
+export async function updateCampaign(campaign: TUpdateCampaign, id: string) {
+  return await prisma.campaigns.update({
+    where: { id },
+    data: campaign
+  });
+}
