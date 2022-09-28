@@ -16,3 +16,15 @@ export async function getUserByMail(email: string) {
     }
   });
 }
+
+export async function createUser({
+  name,
+  last_name,
+  commercial_name,
+  email,
+  password
+}: ICreateUser) {
+  return await prisma.users.create({
+    data: { name, last_name, commercial_name, email, password }
+  });
+}
