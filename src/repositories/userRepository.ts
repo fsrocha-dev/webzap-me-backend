@@ -28,3 +28,13 @@ export async function createUser({
     data: { name, last_name, commercial_name, email, password }
   });
 }
+
+function exclude<Users, Key extends keyof Users>(
+  user: Users,
+  ...keys: Key[]
+): Omit<Users, Key> {
+  for (let key of keys) {
+    delete user[key];
+  }
+  return user;
+}
