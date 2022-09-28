@@ -11,3 +11,12 @@ export async function getAllCampaigns(id_user: string) {
     }
   });
 }
+
+export async function getCampaignById(id: string) {
+  const campaign = await prisma.campaigns.findUnique({
+    where: { id }
+  });
+
+  return campaign;
+}
+
