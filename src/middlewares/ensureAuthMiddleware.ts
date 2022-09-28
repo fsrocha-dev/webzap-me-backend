@@ -16,7 +16,8 @@ export async function ensureAuthMiddleware(
 ) {
   const authToken = req.headers.authorization;
 
-  if (!authToken) return notFoundError('Token não encontrado!');
+  if (!authToken)
+    return res.status(404).send(notFoundError('Token não encontrado!'));
 
   const [, token] = authToken.split(' ');
 
@@ -25,10 +26,10 @@ export async function ensureAuthMiddleware(
 
     const { sub } = verify(token, KEY) as IPayload;
 
-    req.id_user = sub;
+    res.locals.id_user = sub;
 
     return next();
   } catch (error) {
-    return unauthorizedError('Você não tem permissão!');
+    return res.status(401).send(unauthorizedError('Você não tem permissão!'));
   }
 }
