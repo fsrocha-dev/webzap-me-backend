@@ -8,3 +8,11 @@ export async function store(req: Request, res: Response) {
 
   res.json(data);
 }
+
+export async function show(req: Request, res: Response) {
+  const { id } = req.params;
+
+  const data = await service.getUserById(id);
+
+  res.json(data);
+}
