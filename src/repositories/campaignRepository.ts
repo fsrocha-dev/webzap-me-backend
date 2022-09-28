@@ -20,3 +20,8 @@ export async function getCampaignById(id: string) {
   return campaign;
 }
 
+export async function createCampaign(campaign: TCreateCampaign) {
+  return await prisma.campaigns.create({
+    data: campaign
+  });
+}
