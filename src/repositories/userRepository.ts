@@ -4,9 +4,13 @@ import { prisma } from '../database/prismaClient';
 export type ICreateUser = Omit<Users, 'id'>;
 
 export async function getUserById(id: string) {
-  return await prisma.users.findUnique({
+  const user = await prisma.users.findUnique({
     where: { id }
   });
+
+  const userWithoutPassword = exclude(user, 'password');
+
+  return userWithoutPassword;
 }
 
 export async function getUserByMail(email: string) {
@@ -23,7 +27,7 @@ export async function createUser({
   commercial_name,
   email,
   password
-}: ICreateUser) {
+}: ICreateUser): Promise<Users> {
   return await prisma.users.create({
     data: { name, last_name, commercial_name, email, password }
   });
