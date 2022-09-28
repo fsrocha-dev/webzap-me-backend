@@ -3,7 +3,7 @@
     "sourceMap": true,
     "outDir": "dist",
     "lib": ["ESNext"],
-    "strict": true,
+    "strict": false,
     "esModuleInterop": true
   }
 }
