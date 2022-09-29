@@ -30,3 +30,9 @@ export async function getLinkById(id: string) {
 
   return link;
 }
+
+export async function createLink(link: TCreateLink) {
+  return await prisma.links.create({
+    data: link
+  });
+}
