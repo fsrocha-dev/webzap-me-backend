@@ -36,3 +36,10 @@ export async function createLink(link: TCreateLink) {
     data: link
   });
 }
+
+export async function updateLink(link: TUpdateLink, id: string) {
+  return await prisma.links.update({
+    where: { id },
+    data: link
+  });
+}
