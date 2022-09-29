@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "links" ALTER COLUMN "leads" DROP NOT NULL,
+ALTER COLUMN "leads" SET DEFAULT 0;
