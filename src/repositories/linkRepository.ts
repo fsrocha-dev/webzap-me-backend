@@ -30,12 +30,16 @@ export async function getAllLinks(id_user: string) {
   });
 }
 
-export async function getLinksByCampaign(id_campaign: string) {
-  return await prisma.links.findMany({
-    where: {
-      id_campaign
+export async function getLinkById(id: string) {
+  const link = await prisma.links.findUnique({
+    where: { id },
+    include: {
+      campaign: true,
+      infoLeads: true
     }
   });
+
+  return link;
 }
 
 export async function getLinkById(id: string) {
