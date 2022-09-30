@@ -1,4 +1,4 @@
-import { Links } from '@prisma/client';
+import { infoLeads, Links } from '@prisma/client';
 import { prisma } from '../database/prismaClient';
 
 export type TCreateLink = Omit<
@@ -11,6 +11,21 @@ export async function getAllLinks(id_user: string) {
   return await prisma.links.findMany({
     where: {
       id_user
+    },
+    select: {
+      ref: true,
+      phone_number: true,
+      custom_message: true,
+      is_active: true,
+      campaign: {
+        select: {
+          id: true,
+          name: true
+        }
+      },
+      _count: {
+        select: { infoLeads: true }
+      }
     }
   });
 }
