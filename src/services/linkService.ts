@@ -17,8 +17,29 @@ async function getLinkById(id: string) {
   return link;
 }
 
+async function getLinkByRef(ref: string) {
+  const link = await linkRepository.getLinkByRef(ref);
+
+  if (!link) return notFoundError('Link não encontrado!');
+
+  return link;
+}
+
+async function getLinksByCampaign(id_campaign: string) {
+  const links = await linkRepository.getLinksByCampaign(id_campaign);
+
+  if (!links) return notFoundError('Link não encontrado!');
+
+  return links;
+}
+
 async function makeLink(data: linkRepository.TCreateLink) {
-  const createdLink = await linkRepository.createLink(data);
+  const refLinkGenerator = Math.random().toString(36).substring(2, 8);
+
+  const createdLink = await linkRepository.createLink({
+    ref: refLinkGenerator,
+    ...data
+  });
 
   return createdLink;
 }
@@ -31,4 +52,11 @@ async function updateLink(data: linkRepository.TUpdateLink, id: string) {
   return link;
 }
 
-export { getAllLinks, getLinkById, makeLink, updateLink };
+export {
+  getAllLinks,
+  getLinkById,
+  getLinkByRef,
+  getLinksByCampaign,
+  makeLink,
+  updateLink
+};
