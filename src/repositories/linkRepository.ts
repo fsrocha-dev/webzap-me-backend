@@ -42,14 +42,21 @@ export async function getLinkById(id: string) {
   return link;
 }
 
-export async function getLinkById(id: string) {
+export async function getLinkByRef(ref: string) {
   const link = await prisma.links.findUnique({
-    where: { id }
+    where: { ref }
   });
 
   return link;
 }
 
+export async function getLinksByCampaign(id_campaign: string) {
+  return await prisma.links.findMany({
+    where: {
+      id_campaign
+    }
+  });
+}
 export async function createLink(link: TCreateLink) {
   return await prisma.links.create({
     data: link
