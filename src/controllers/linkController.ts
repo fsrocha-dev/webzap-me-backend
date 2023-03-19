@@ -17,6 +17,14 @@ export async function show(req: Request, res: Response) {
   res.json(data);
 }
 
+export async function showByRef(req: Request, res: Response) {
+  const { ref } = req.params;
+
+  const data = await service.getLinkByRef(ref);
+
+  res.json(data);
+}
+
 export async function store(req: Request, res: Response) {
   const { id_user } = res.locals;
 
@@ -24,6 +32,7 @@ export async function store(req: Request, res: Response) {
 
   const data = await service.makeLink({
     id_user: id_user,
+    is_active: !Link.is_active ?? true,
     ...Link
   });
 
