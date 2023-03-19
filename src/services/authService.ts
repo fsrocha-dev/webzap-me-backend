@@ -14,11 +14,11 @@ interface IAuthenticate {
 export async function authUser({ email, password }: IAuthenticate) {
   const user = await getUserByMail(email);
 
-  if (!user) return unauthorizedError('Email e/ou senha inválidos!');
+  if (!user) throw unauthorizedError('Email e/ou senha inválidos!');
 
   const passwordMatch = await compare(password, user.password);
 
-  if (!passwordMatch) return unauthorizedError('Email e/ou senha inválidos!');
+  if (!passwordMatch) throw unauthorizedError('Email e/ou senha inválidos!');
 
   const KEY = process.env.SECRET_KEY;
 
@@ -27,5 +27,5 @@ export async function authUser({ email, password }: IAuthenticate) {
     expiresIn: '1d'
   });
 
-  return token;
+  return { token, username: user.name };
 }

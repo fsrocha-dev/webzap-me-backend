@@ -5,7 +5,7 @@ import { conflictError, notFoundError } from '../utils/errorUtils';
 
 async function getUserById(id: string) {
   const user = await userRepository.getUserById(id);
-  if (!user) return notFoundError('Usuário não encontrado!');
+  if (!user) throw notFoundError('Usuário não encontrado!');
 
   return user;
 }
@@ -13,7 +13,7 @@ async function getUserById(id: string) {
 async function makeUser(user: ICreateUser) {
   const userExist = await userRepository.getUserByMail(user.email);
 
-  if (userExist) return conflictError('Favor, tente usar outro e-mail!');
+  if (userExist) throw conflictError('Favor, tente usar outro e-mail!');
 
   const hashPassword = await hash(user.password, 10);
 

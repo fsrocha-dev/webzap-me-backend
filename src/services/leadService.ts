@@ -9,7 +9,7 @@ async function createLead(data: leadRepository.TCreateLead, ref: string) {
   if (!link) return notFoundError('Link não existe!');
 
   const lead = await leadRepository.createLead({ id_link: link.id, ...data });
-  console.log(lead);
+
   if (!lead) return badRequestError('Não foi possível registrar o lead!');
 }
 
