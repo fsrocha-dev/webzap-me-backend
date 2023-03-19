@@ -7,5 +7,5 @@ export async function store(req: Request, res: Response) {
 
   await service.createLead(leadInfo, ref);
 
-  res.status(200);
+  res.sendStatus(200);
 }
