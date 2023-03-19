@@ -46,6 +46,7 @@ model Links {
   ref            String      @unique
   phone_number   String
   custom_message String
+  whatsapp_link  String
   is_active      Boolean     @default(true)
   has_preview    Boolean     @default(false)
   created_at     DateTime    @default(now())
