@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/server.ts",
-		"build": "tsc",
-		"start": "node dist/server.js"
+    "build": "tsc",
+    "start": "node dist/server.js"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +19,7 @@
     "dotenv": "^16.0.2",
     "express": "^4.18.1",
     "express-async-errors": "^3.1.1",
+    "express-rate-limit": "^6.7.0",
     "joi": "^17.6.1",
     "jsonwebtoken": "^8.5.1"
   },
