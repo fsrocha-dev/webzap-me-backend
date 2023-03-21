@@ -6,9 +6,11 @@ import leadRouter from './leadRouter';
 import linkRouter from './linkRouter';
 import publicRouter from './publicRouter';
 import userRouter from './userRouter';
+import rateLimitApi from '../utils/rateLimit';
 
 const router = Router();
 
+router.use(rateLimitApi);
 router.use(publicRouter);
 router.use(leadRouter);
 router.use(userRouter);
